@@ -2,4 +2,5 @@
     <string name="app_name">帮我做决定</string>
     <string name="coin">掷硬币</string>
     <string name="craps">掷骰子</string>
+    <string name="truntable">圆盘抽奖</string>
 </resources>

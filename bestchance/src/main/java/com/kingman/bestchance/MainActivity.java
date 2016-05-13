@@ -30,6 +30,11 @@ public class MainActivity extends FragmentActivity {
      */
     private CrapsFragment crapsFragment;
 
+    /**
+     * 圆盘抽奖的Fragment
+     */
+    private TurnTableFragment turnTableFragment;
+
     private ViewPager pager;
 
 
@@ -72,6 +77,7 @@ public class MainActivity extends FragmentActivity {
         selecters = new ArrayList<Selecter>();
         selecters.add(new Selecter(R.drawable.icon_coin, getString(R.string.coin)));
         selecters.add(new Selecter(R.drawable.icon_craps, getString(R.string.craps)));
+        selecters.add(new Selecter(R.drawable.share_lottery, getString(R.string.truntable)));
         adapter2.setItems(selecters);
         recyclerViewCategory.setAdapter(adapter2);
         recyclerViewCategory.setItemAnimator(null); //new DefaultItemAnimator()
@@ -101,7 +107,7 @@ public class MainActivity extends FragmentActivity {
             super(fm);
         }
 
-        private final String[] titles = { "Coin", "Craps"};
+        private final String[] titles = { "Coin", "Craps", "TurnTable"};
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -126,6 +132,12 @@ public class MainActivity extends FragmentActivity {
                         crapsFragment = new CrapsFragment();
                     }
                     return crapsFragment;
+                case 2:
+                    if (turnTableFragment == null) {
+                        turnTableFragment = new TurnTableFragment();
+                    }
+                    return turnTableFragment;
+
                 default:
                     return null;
             }
