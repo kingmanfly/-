@@ -2,6 +2,7 @@ package com.kingman.bestchance;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -35,8 +36,17 @@ public class MainActivity extends FragmentActivity {
      */
     private TurnTableFragment turnTableFragment;
 
-    private ViewPager pager;
+    /**
+     * 瓶子的Fragment,(真心话大冒险的瓶子)
+     */
+    private BottleFragment bottleFragment;
 
+    /**
+     * 随机数的Fragment
+     */
+    private RandomFragment randomFragment;
+
+    public ViewPager pager;
 
     private RecyclerView recyclerViewCategory;
 
@@ -59,7 +69,6 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onPageSelected(int position) {
-                System.out.println("ppp onPageScrolled position = " + position);
                 adapter2.setCurrentSelect(position);
             }
 
@@ -69,17 +78,27 @@ public class MainActivity extends FragmentActivity {
             }
         });
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);//这里用线性显示 类似于list view
 
-        recyclerViewCategory.setLayoutManager(layoutManager);//这里用线性显示 类似于list view
-        //recyclerViewCategory.setLayoutManager(new StaggeredGridLayoutManager(4, StaggeredGridLayoutManager.VERTICAL));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 5);
+        gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+
+        // 交错网格布局管理器
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
+        // 设置布局管理器
+
+        recyclerViewCategory.setLayoutManager(gridLayoutManager);
+
         adapter2 = new SingleMemberSelectAdapter(this);
         selecters = new ArrayList<Selecter>();
         selecters.add(new Selecter(R.drawable.icon_coin, getString(R.string.coin)));
         selecters.add(new Selecter(R.drawable.icon_craps, getString(R.string.craps)));
         selecters.add(new Selecter(R.drawable.share_lottery, getString(R.string.truntable)));
-        adapter2.setItems(selecters);
+        selecters.add(new Selecter(R.drawable.bottle, getString(R.string.bottle)));
+        selecters.add(new Selecter(R.drawable.random, getString(R.string.random)));
+
         recyclerViewCategory.setAdapter(adapter2);
+        adapter2.setItems(selecters);
         recyclerViewCategory.setItemAnimator(null); //new DefaultItemAnimator()
         recyclerViewCategory.addOnItemTouchListener(
                 new RecyclerItemClickListener(getApplicationContext(),
@@ -88,7 +107,6 @@ public class MainActivity extends FragmentActivity {
 
                             @Override
                             public void onItemClick(View view, int position) {
-                                System.out.println("ppp position = " + position);
                                 pager.setCurrentItem(position);
                             }
 
@@ -107,7 +125,7 @@ public class MainActivity extends FragmentActivity {
             super(fm);
         }
 
-        private final String[] titles = { "Coin", "Craps", "TurnTable"};
+        private final String[] titles = { "Coin", "Craps", "TurnTable", "Bottle", "Random"};
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -137,6 +155,17 @@ public class MainActivity extends FragmentActivity {
                         turnTableFragment = new TurnTableFragment();
                     }
                     return turnTableFragment;
+                case 3:
+                    if (bottleFragment == null) {
+                        bottleFragment = new BottleFragment();
+                    }
+                    return bottleFragment;
+
+                case 4:
+                    if (randomFragment == null) {
+                        randomFragment = new RandomFragment();
+                    }
+                    return randomFragment;
 
                 default:
                     return null;

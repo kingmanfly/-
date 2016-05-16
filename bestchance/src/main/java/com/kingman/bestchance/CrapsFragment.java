@@ -1,5 +1,6 @@
 package com.kingman.bestchance;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -60,8 +61,8 @@ public class CrapsFragment  extends Fragment implements View.OnClickListener{
                 }
                 isStart = true;
                 craps.setImageResource(R.drawable.craps_loading);
+                Util.launchAnimation(craps);
                 break;
-
         }
     }
 }

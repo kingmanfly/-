@@ -3,4 +3,6 @@
     <string name="coin">掷硬币</string>
     <string name="craps">掷骰子</string>
     <string name="truntable">圆盘抽奖</string>
+    <string name="bottle">瓶子</string>
+    <string name="random">随机数</string>
 </resources>

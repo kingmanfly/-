@@ -5,4 +5,7 @@
     <string name="coin">Coin</string>
     <string name="craps">Craps</string>
     <string name="truntable">TurnTable</string>
+    <string name="bottle">Bootle</string>
+    <string name="random">Random</string>
+
 </resources>

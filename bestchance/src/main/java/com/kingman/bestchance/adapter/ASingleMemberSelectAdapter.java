@@ -35,12 +35,15 @@ public abstract class ASingleMemberSelectAdapter<T> extends BaseSingleSelectStat
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof SingleSelectViewHolder) {
-            ((SingleSelectViewHolder) holder).bindViewData(
-                    getItemImage(position),
-                    getItemTitle(position),
-                    position);
+        if(position != RecyclerView.NO_POSITION){
+            if (holder instanceof SingleSelectViewHolder) {
+                ((SingleSelectViewHolder) holder).bindViewData(
+                        getItemImage(position),
+                        getItemTitle(position),
+                        position);
+            }
         }
+
     }
 
     @Override

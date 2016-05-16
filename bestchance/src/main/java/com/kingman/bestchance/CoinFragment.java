@@ -1,5 +1,6 @@
 package com.kingman.bestchance;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -43,7 +44,8 @@ public class CoinFragment extends Fragment implements View.OnClickListener{
                     return;
                 }
                 isStart = true;
-                coin.setImageResource(R.drawable.coin_loading);
+                coin.setImageDrawable(getResources().getDrawable(R.drawable.coin_loading));
+                Util.launchAnimation(coin);
                 break;
 
         }
