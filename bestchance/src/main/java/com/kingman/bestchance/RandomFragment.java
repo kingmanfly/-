@@ -3,10 +3,10 @@ package com.kingman.bestchance;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 /**
@@ -31,6 +31,13 @@ public class RandomFragment extends Fragment implements View.OnClickListener{
     }
 
     @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        isStart = false;
+        textViewRandom = null;
+    }
+
+    @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.textview_random:
@@ -41,22 +48,21 @@ public class RandomFragment extends Fragment implements View.OnClickListener{
                 isStart = true;
                 new MyThread().start();
                 break;
-
         }
     }
 
     class MyThread extends Thread{
         @Override
         public void run() {
-            while(true){
-                if(isStart){
-                    ThreadTool.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            textViewRandom.setText("" + RandomGenerator.generator(100));
-                        }
-                    });
-                }
+            int  i = 0;
+            while(isStart){
+                Log.v("xxxxx", "MyThread" + i++);
+                ThreadTool.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        textViewRandom.setText("" + RandomGenerator.generator(100));
+                    }
+                });
                 try {
                     Thread.sleep(50l);
                 } catch (InterruptedException e) {

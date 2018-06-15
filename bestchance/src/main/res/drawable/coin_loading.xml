@@ -2,9 +2,15 @@
 <animation-list xmlns:android="http://schemas.android.com/apk/res/android"
     android:oneshot="false">
     <item
-        android:drawable="@drawable/coin_positive"
+        android:drawable="@drawable/coin_one"
         android:duration="50" />
     <item
-        android:drawable="@drawable/coin_negative"
+        android:drawable="@drawable/coin_two"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/coin_three"
+        android:duration="50" />
+    <item
+        android:drawable="@drawable/coin_four"
         android:duration="50" />
 </animation-list>

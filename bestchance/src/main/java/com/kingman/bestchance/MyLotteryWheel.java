@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.animation.ValueAnimator.AnimatorUpdateListener;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -55,8 +54,8 @@ public class MyLotteryWheel extends View {
     public Bitmap gift6;
     private int[] mImgs = new int[] {
             R.drawable.danfan, R.drawable.ipad,
-            R.drawable.ic_launcher, R.drawable.iphone, R.drawable.meizi,
-            R.drawable.ic_launcher
+            R.drawable.iphone, R.drawable.iphone, R.drawable.meizi,
+            R.drawable.iphone
     };
     class MyGift{
         public Bitmap bmp;

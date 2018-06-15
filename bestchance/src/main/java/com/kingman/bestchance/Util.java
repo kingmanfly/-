@@ -17,4 +17,15 @@ public class Util {
             animation.start();
         }
     }
+
+    public static void stopAnimation(ImageView imageView){
+        if (null != imageView.getDrawable()
+                && imageView.getDrawable() instanceof AnimationDrawable) {
+            AnimationDrawable animation = (AnimationDrawable) imageView.getDrawable();
+            if(animation != null && animation.isRunning()){
+                animation.stop();
+            }
+        }
+    }
+
 }

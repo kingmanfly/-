@@ -1,19 +1,18 @@
 package com.kingman.bestchance;
 
-import android.support.v4.app.FragmentActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-
+import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
-
+import android.support.v7.app.AlertDialog;
 import com.kingman.bestchance.adapter.SingleMemberSelectAdapter;
 import com.kingman.bestchance.model.Selecter;
 
@@ -80,7 +79,7 @@ public class MainActivity extends FragmentActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);//这里用线性显示 类似于list view
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 5);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, 4);
         gridLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
 
         // 交错网格布局管理器
@@ -93,9 +92,9 @@ public class MainActivity extends FragmentActivity {
         selecters = new ArrayList<Selecter>();
         selecters.add(new Selecter(R.drawable.icon_coin, getString(R.string.coin)));
         selecters.add(new Selecter(R.drawable.icon_craps, getString(R.string.craps)));
-        selecters.add(new Selecter(R.drawable.share_lottery, getString(R.string.truntable)));
-        selecters.add(new Selecter(R.drawable.bottle, getString(R.string.bottle)));
-        selecters.add(new Selecter(R.drawable.random, getString(R.string.random)));
+        //selecters.add(new Selecter(R.drawable.icon_lottery, getString(R.string.truntable)));
+        selecters.add(new Selecter(R.drawable.icon_bottle, getString(R.string.bottle)));
+        selecters.add(new Selecter(R.mipmap.random_one, getString(R.string.random)));
 
         recyclerViewCategory.setAdapter(adapter2);
         adapter2.setItems(selecters);
@@ -125,7 +124,7 @@ public class MainActivity extends FragmentActivity {
             super(fm);
         }
 
-        private final String[] titles = { "Coin", "Craps", "TurnTable", "Bottle", "Random"};
+        private final String[] titles = { "Coin", "Craps",  "Bottle", "Random"};    //"TurnTable",
 
         @Override
         public CharSequence getPageTitle(int position) {
@@ -150,18 +149,18 @@ public class MainActivity extends FragmentActivity {
                         crapsFragment = new CrapsFragment();
                     }
                     return crapsFragment;
-                case 2:
+                /*case 2:
                     if (turnTableFragment == null) {
                         turnTableFragment = new TurnTableFragment();
                     }
-                    return turnTableFragment;
-                case 3:
+                    return turnTableFragment;*/
+                case 2:
                     if (bottleFragment == null) {
                         bottleFragment = new BottleFragment();
                     }
                     return bottleFragment;
 
-                case 4:
+                case 3:
                     if (randomFragment == null) {
                         randomFragment = new RandomFragment();
                     }
@@ -173,4 +172,26 @@ public class MainActivity extends FragmentActivity {
         }
 
     }
+
+    @Override
+    public void onBackPressed() {
+        if(!isFinishing()){
+            showBackDialog();
+        }
+    }
+
+    private void showBackDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("退出程序");
+        builder.setMessage("客官，您是要走吗？");
+        builder.setNegativeButton("取消", null);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                MainActivity.this.finish();
+            }
+        });
+        builder.show();
+    }
+
 }
